@@ -1,11 +1,16 @@
 import Ember from 'ember';
 
-const { Controller } = Ember;
+const { Controller, inject, get } = Ember;
 
 export default Controller.extend({
+	session: inject.service(),
+
 	actions: {
 		selectUser (user) {
-			console.log(`chose user ${user.get('name')}`);
+			return get(this, 'session').authenticate('authenticator:user-model', get(user, 'id'))
+			.then(() => {
+				this.transitionToRoute('authenticated');
+			});
 		}
 	}
 });
