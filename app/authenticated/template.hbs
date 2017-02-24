@@ -1,0 +1,5 @@
+{{#bs-nav type="pills" as |nav|}}
+    {{#nav.item}}{{#link-to "authenticated"}}Home{{/link-to}}{{/nav.item}}
+    {{#nav.item}}<a {{action "logOut"}}>Log out</a>{{/nav.item}}
+{{/bs-nav}}
+{{outlet}}
