@@ -1,27 +1,27 @@
 import Base from 'ember-simple-auth/authenticators/base';
 import Ember from 'ember';
 
-const { inject, assert, RSVP: { resolve }, get, set } = Ember;
+const { inject, get, set } = Ember;
 
 export default Base.extend({
 	store: inject.service(),
 	session: inject.service(),
 
 	authenticate (userId) {
-		this._setUserOnSession(userId);
-		return resolve();
+		return this._setUserOnSession(userId)
+		.then(() => { return { userId }; });
 	},
 
-	restore (userId) {
-		this._setUserOnSession(userId);
-		return resolve();
+	restore (data) {
+		return this._setUserOnSession(data.userId)
+		.then(() => data);
 	},
 
 	_setUserOnSession (userId) {
-		const userModel = get(this, 'store').peekRecord('user', userId);
-		assert('authenticator:user-model must be given a valid user ID', userModel);
-
-		// Pin the user model on the session.
-		set(this, 'session.data.user', userModel);
+		return get(this, 'store').findRecord('user', userId)
+		.then(() => {
+			// Pin the user ID on the session so it's accessible throughout the app.
+			set(this, 'session.data.userId', userId);
+		});
 	}
 });
