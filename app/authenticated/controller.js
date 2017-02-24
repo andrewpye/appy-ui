@@ -6,10 +6,10 @@ export default Controller.extend({
 	session: inject.service(),
 
 	actions: {
-		logIn (user) {
-			return get(this, 'session').authenticate('authenticator:user-model', get(user, 'id'))
+		logOut () {
+			return get(this, 'session').invalidate()
 			.then(() => {
-				this.transitionToRoute('authenticated');
+				this.transitionToRoute('login');
 			});
 		}
 	}

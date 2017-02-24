@@ -1,7 +1,7 @@
 import Base from 'ember-simple-auth/authenticators/base';
 import Ember from 'ember';
 
-const { inject, get, set } = Ember;
+const { inject, RSVP: { resolve }, get, set } = Ember;
 
 export default Base.extend({
 	store: inject.service(),
@@ -15,6 +15,11 @@ export default Base.extend({
 	restore (data) {
 		return this._setUserOnSession(data.userId)
 		.then(() => data);
+	},
+
+	invalidate () {
+		delete get(this, 'session.data')['userId'];
+		return resolve();
 	},
 
 	_setUserOnSession (userId) {
