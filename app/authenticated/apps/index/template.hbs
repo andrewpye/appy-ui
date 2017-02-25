@@ -8,7 +8,12 @@
 	{{#link-to "authenticated.apps.new"}}Add another app...{{/link-to}}
 {{else}}
 	{{#centered-content}}
-		<h2>You don't have any apps yet!</h2>
-		{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one
+		{{#if (can "create app")}}
+			<h2>You don't have any apps yet!</h2>
+			{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one
+		{{else}}
+			<h2>It doesn't look like anybody's created any apps yet!</h2>
+			Wait for some to be created, then come back again
+		{{/if}}
 	{{/centered-content}}
 {{/if}}

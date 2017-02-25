@@ -17,8 +17,9 @@ function roleIs (role) {
 }
 
 export default Ability.extend(CurrentUserMixin, {
-	canDelete: isCreator(),
+	canCreate: roleIs('developer'),
 	canEdit: isCreator(),
+	canDelete: isCreator(),
 	canPublish: roleIs('developer'),
 	canApprove: roleIs('admin')
 });
