@@ -1,0 +1,5 @@
+<h4>{{app.name}}</h4>
+Status: {{app.status}}
+{{yield (hash
+	actionsPanel=(component "app-actions-panel" app=app)
+)}}
