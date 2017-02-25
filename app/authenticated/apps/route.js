@@ -1,4 +1,9 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const { Route, get } = Ember;
+
+export default Route.extend({
+	model () {
+		return get(this, 'store').findAll('app');
+	}
 });

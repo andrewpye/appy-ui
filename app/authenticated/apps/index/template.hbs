@@ -1,0 +1,8 @@
+{{#each model as |app|}}
+	{{app-overview app=app}}
+{{else}}
+	{{#centered-content}}
+		<h2>You don't have any apps yet!</h2>
+		{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one
+	{{/centered-content}}
+{{/each}}
