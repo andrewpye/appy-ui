@@ -1,7 +1,7 @@
 <div class="container">
 	<h3>Tell us a bit about your app</h3>
-	{{#bs-form formLayout="vertical" model=model as |form|}}
-		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name" required=true}}
+	{{#bs-form formLayout="vertical" model=(changeset model appValidations) onSubmit=(action "saveApp") as |form|}}
+		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name"}}
 		{{form.element controlType="textarea" label="Description" placeholder="Give a brief description of the app" property="description"}}
 
 		{{bs-button defaultText="Create my app!" type="primary" buttonType="submit" class="pull-right"}}
