@@ -1,14 +1,11 @@
 {{#centered-content}}
 	<h1>Welcome to appy!</h1>
-	{{#bs-form formLayout="horizontal" as |form|}}
-		{{#bs-dropdown as |dd|}}
-			
-			{{#dd.button}}<span>Choose a user...</span> <span class="caret" />{{/dd.button}}
-			{{#dd.menu}}
-				{{#each (sort-by "name" model) as |user|}}
-					<div {{action (action "logIn") user}}>{{user.name}} ({{user.role}})</div>
-				{{/each}}
-			{{/dd.menu}}
-		{{/bs-dropdown}}
-	{{/bs-form}}
+	{{#bs-dropdown as |dd|}}
+		{{#dd.button}}<span>Choose a user...</span> <span class="caret" />{{/dd.button}}
+		{{#dd.menu}}
+			{{#each (sort-by "name" model) as |user|}}
+				<div {{action (action "logIn") user}}>{{user.name}} ({{user.role}})</div>
+			{{/each}}
+		{{/dd.menu}}
+	{{/bs-dropdown}}
 {{/centered-content}}
