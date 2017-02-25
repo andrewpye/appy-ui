@@ -15,6 +15,11 @@ export default Controller.extend({
 			.catch(error => {
 				console.log(error);
 			});
+		},
+
+		cancel (changeset) {
+			changeset.rollback();
+			this.transitionToRoute('authenticated.apps');
 		}
 	}
 });
