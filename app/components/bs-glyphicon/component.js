@@ -9,7 +9,8 @@ export default Component.extend({
 
 	glyphName: computed('icon', {
 		get () {
-			return `glyphicon-${get(this, 'icon')}`;
+			const icon = get(this, 'icon');
+			return icon ? `glyphicon-${icon}` : '';
 		}
 	})
 });
