@@ -1,20 +1,26 @@
 {{#if (can "edit app" app)}}
-	{{bs-glyphicon icon="pencil" tooltip="Edit this app"}}
+	<button {{action (action (mut selectedApp))}}>
+		{{#bs-tooltip}}Edit{{/bs-tooltip}}
+		{{bs-glyphicon icon="pencil"}}
+	</button>
 {{/if}}
 
 {{#if (can "delete app" app)}}
-	{{bs-glyphicon icon="remove" tooltip="Delete this app"}}
+	<button {{action (action (perform deleteAppTask))}}>
+		{{#bs-tooltip}}Delete{{/bs-tooltip}}
+		{{bs-glyphicon icon="remove"}}
+	</button>
 {{/if}}
 
 {{#if (can "publish app" app)}}
 	{{#if (eq app.status "draft")}}
 		{{#async-button action=(action (perform setAppStatusTask) "submitted")}}
-			{{#bs-tooltip}}Submit this app{{/bs-tooltip}}
+			{{#bs-tooltip}}Submit{{/bs-tooltip}}
 			{{bs-glyphicon icon="ok-circle"}}
 		{{/async-button}}
 	{{else}}
 		{{#async-button action=(action (perform setAppStatusTask) "draft")}}
-			{{#bs-tooltip}}Unsubmit this app{{/bs-tooltip}}
+			{{#bs-tooltip}}Unsubmit{{/bs-tooltip}}
 			{{bs-glyphicon icon="remove-circle"}}
 		{{/async-button}}
 	{{/if}}
@@ -23,12 +29,12 @@
 {{#if (can "approve app" app)}}
 	{{#if (eq app.status "submitted")}}
 		{{#async-button action=(action (perform setAppStatusTask) "approved")}}
-			{{#bs-tooltip}}Publish this app{{/bs-tooltip}}
+			{{#bs-tooltip}}Publish{{/bs-tooltip}}
 			{{bs-glyphicon icon="ok-circle"}}
 		{{/async-button}}
 	{{else}}
 		{{#async-button action=(action (perform setAppStatusTask) "submitted")}}
-			{{#bs-tooltip}}Unpublish this app{{/bs-tooltip}}
+			{{#bs-tooltip}}Unpublish{{/bs-tooltip}}
 			{{bs-glyphicon icon="remove-circle"}}
 		{{/async-button}}
 	{{/if}}
