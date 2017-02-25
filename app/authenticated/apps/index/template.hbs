@@ -1,10 +1,14 @@
 {{#if model.length}}
 	<h2>Your apps</h2>
-	{{#each model as |app|}}
-		{{#app-info app=app as |appInfo|}}
-			{{appInfo.actionsPanel}}
-		{{/app-info}}
-	{{/each}}
+	<ul class="list-group">
+		{{#each model as |app|}}
+			<li class="list-group-item">
+				{{#app-info app=app as |appInfo|}}
+					{{appInfo.actionsPanel}}
+				{{/app-info}}
+			</li>
+		{{/each}}
+	</ul>
 	{{#link-to "authenticated.apps.new"}}Add another app...{{/link-to}}
 {{else}}
 	{{#centered-content}}
