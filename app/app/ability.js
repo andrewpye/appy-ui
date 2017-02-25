@@ -4,39 +4,21 @@ import CurrentUserMixin from 'appy-ui/mixins/current-user';
 
 const { computed, get } = Ember;
 
-function allEqual (requirements) {
-	const dependentKeys = [];
+function isCreator () {
+	return computed('currentUser.id', 'model.createdBy.id', function () {
+		return get(this, 'currentUser.id') === get(this, 'model.createdBy.id');
+	});
+}
 
-	for (const propName in requirements)
-	{
-		dependentKeys.push(propName);
-	}
-
-	return computed(...dependentKeys, function () {
-		for (const propName in requirements)
-		{
-			if (get(this, propName) !== requirements[propName])
-			{
-				return false;
-			}
-
-			return true;
-		}
+function roleIs (role) {
+	return computed('currentUser.role', function () {
+		return get(this, 'currentUser.role') === role;
 	});
 }
 
 export default Ability.extend(CurrentUserMixin, {
-	canDelete: computed('currentUser.id', 'model.createdBy.id', function () {
-		return get(this, 'currentUser.id') === get(this, 'model.createdBy.id');
-	}),
-
-	canPublish: allEqual({
-		'currentUser.role': 'developer',
-		'model.status': 'draft'
-	}),
-
-	canApprove: allEqual({
-		'currentUser.role': 'admin',
-		'model.status': 'submitted'
-	})
+	canDelete: isCreator(),
+	canEdit: isCreator(),
+	canPublish: roleIs('developer'),
+	canApprove: roleIs('admin')
 });

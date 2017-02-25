@@ -1,3 +1,15 @@
+{{#if (can "edit app" app)}}
+	{{bs-glyphicon icon="pencil" tooltip="Edit this app"}}
+{{/if}}
+
 {{#if (can "delete app" app)}}
 	{{bs-glyphicon icon="remove" tooltip="Delete this app"}}
+{{/if}}
+
+{{#if (can "publish app" app)}}
+	{{bs-glyphicon icon="ok" tooltip="Publish this app"}}
+{{/if}}
+
+{{#if (can "approve app" app)}}
+	{{bs-glyphicon icon="ok" tooltip="Approve this app"}}
 {{/if}}
