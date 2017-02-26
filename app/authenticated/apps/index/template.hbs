@@ -21,11 +21,15 @@
 {{else}}
 	{{#centered-content}}
 		{{#if (can "create app")}}
-			<h2>You don't have any apps yet!</h2>
-			{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one
+			<h3>
+				<div>You don't have any apps yet!</div>
+				<small>{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one</small>
+			</h3>
 		{{else}}
-			<h2>It doesn't look like anybody's created any apps yet!</h2>
-			Wait for some to be created, then come back again
+			<h3>
+				<div>It doesn't look like anybody's submitted any apps yet...</div>
+				<small>Come back again later!</small>
+			</h3>
 		{{/if}}
 	{{/centered-content}}
 {{/if}}
