@@ -2,17 +2,13 @@
 	{{#if model.length}}
 		<p class="header">
 			<span class="h2">
-				{{#if (can "create app")}}
-					Your apps
-				{{else}}
-					Submitted apps
-				{{/if}}
+				{{if (can "create app") "Your" "Submitted"}} apps
 			</span>
 			<span class="pull-right">
 				<ul class="list-inline">
 					{{!-- Checkboxes for filtering apps by status --}}
 					<li>
-						<span>Show: {{app-filter-settings filterSettings=appFilterSettings}}</span>
+						{{app-filter-settings filterSettings=appFilterSettings}}
 					</li>
 
 					{{#if (can "create app")}}
