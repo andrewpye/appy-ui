@@ -1,6 +1,6 @@
 {{#if model.length}}
-	<div class="h2">
-		<span>
+	<div>
+		<span class="h2">
 			{{#if (can "create app")}}
 				Your apps
 			{{else}}
@@ -26,12 +26,18 @@
 					as |appInfo|
 				}}
 					{{#appInfo.header as |appInfoHeader|}}
-						{{appInfoHeader.statusIndicator}}
-						{{appInfoHeader.actionsPanel
-							onEditApp=(route-action "onEditApp")
-							onDeleteApp=(route-action "onDeleteApp")
-							onSetAppStatus=(route-action "onSetAppStatus")
-						}}
+						<ul class="list-inline">
+							<li>
+								{{appInfoHeader.statusIndicator}}
+							</li>
+							<li>
+								{{appInfoHeader.actionsPanel
+									onEditApp=(route-action "onEditApp")
+									onDeleteApp=(route-action "onDeleteApp")
+									onSetAppStatus=(route-action "onSetAppStatus")
+								}}
+							</li>
+						</ul>
 					{{/appInfo.header}}
 
 					{{#appInfo.content}}
