@@ -1,69 +1,78 @@
-{{#if model.length}}
-	<div>
-		<span class="h2">
-			{{#if (can "create app")}}
-				Your apps
+<div class="container-fluid">
+	{{#if model.length}}
+		<p class="header">
+			<span class="h2">
+				{{#if (can "create app")}}
+					Your apps
+				{{else}}
+					Submitted apps
+				{{/if}}
+			</span>
+			<span class="pull-right">
+				<ul class="list-inline">
+					{{!-- Checkboxes for filtering apps by status --}}
+					<li>
+						<span>Show: {{app-filter-settings filterSettings=appFilterSettings}}</span>
+					</li>
+
+					{{#if (can "create app")}}
+						<li>
+							{{#link-to "authenticated.apps.new" class="btn btn-primary"}}New...{{/link-to}}
+						</li>
+					{{/if}}
+				</ul>
+			</span>
+		</p>
+
+		<ul class="list-group">
+			{{#each filteredApps as |app|}}
+				<li class="list-group-item">
+					{{#app-info
+						app=app
+						expanded=(eq app selectedApp)
+						onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
+						as |appInfo|
+					}}
+						{{#appInfo.header as |appInfoHeader|}}
+							<ul class="list-inline">
+								<li>
+									{{appInfoHeader.statusIndicator}}
+								</li>
+								<li>
+									{{appInfoHeader.actionsPanel
+										onEditApp=(route-action "onEditApp")
+										onDeleteApp=(route-action "onDeleteApp")
+										onSetAppStatus=(route-action "onSetAppStatus")
+									}}
+								</li>
+							</ul>
+						{{/appInfo.header}}
+
+						{{#appInfo.content}}
+							<hr />
+							{{app.description}}
+						{{/appInfo.content}}
+					{{/app-info}}
+				</li>
 			{{else}}
-				Submitted apps
-			{{/if}}
-		</span>
-		<span class="pull-right">
-			{{!-- Checkboxes for filtering apps by status --}}
-			<span>Show: {{app-filter-settings filterSettings=appFilterSettings}}</span>
-
+				<h4>
+					<div>No apps match your current filter settings</div>
+				</h4>
+			{{/each}}
+		</ul>
+	{{else}}
+		{{#centered-content}}
 			{{#if (can "create app")}}
-				{{#link-to "authenticated.apps.new" class="btn btn-primary"}}New...{{/link-to}}
+				<h4>
+					<div>You don't have any apps yet!</div>
+					<small>{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one</small>
+				</h4>
+			{{else}}
+				<h4>
+					<div>It doesn't look like anybody's submitted any apps yet...</div>
+					<small>Come back again later!</small>
+				</h4>
 			{{/if}}
-		</span>
-	</div>
-	<ul class="list-group">
-		{{#each filteredApps as |app|}}
-			<li class="list-group-item">
-				{{#app-info
-					app=app
-					expanded=(eq app selectedApp)
-					onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
-					as |appInfo|
-				}}
-					{{#appInfo.header as |appInfoHeader|}}
-						<ul class="list-inline">
-							<li>
-								{{appInfoHeader.statusIndicator}}
-							</li>
-							<li>
-								{{appInfoHeader.actionsPanel
-									onEditApp=(route-action "onEditApp")
-									onDeleteApp=(route-action "onDeleteApp")
-									onSetAppStatus=(route-action "onSetAppStatus")
-								}}
-							</li>
-						</ul>
-					{{/appInfo.header}}
-
-					{{#appInfo.content}}
-						<hr />
-						{{app.description}}
-					{{/appInfo.content}}
-				{{/app-info}}
-			</li>
-		{{else}}
-			<h4>
-				<div>No apps match your current filter settings</div>
-			</h4>
-		{{/each}}
-	</ul>
-{{else}}
-	{{#centered-content}}
-		{{#if (can "create app")}}
-			<h4>
-				<div>You don't have any apps yet!</div>
-				<small>{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one</small>
-			</h4>
-		{{else}}
-			<h4>
-				<div>It doesn't look like anybody's submitted any apps yet...</div>
-				<small>Come back again later!</small>
-			</h4>
-		{{/if}}
-	{{/centered-content}}
-{{/if}}
+		{{/centered-content}}
+	{{/if}}
+</div>
