@@ -1,6 +1,12 @@
 {{#if model.length}}
 	<div class="h2">
-		<span>Your apps</span>
+		<span>
+			{{#if (can "create app")}}
+				Your apps
+			{{else}}
+				Submitted apps
+			{{/if}}
+		</span>
 		<span class="pull-right">
 			{{!-- Checkboxes for filtering apps by status --}}
 			<span>Show: {{app-filter-settings filterSettings=appFilterSettings}}</span>
@@ -20,12 +26,12 @@
 					as |appInfo|
 				}}
 					{{#appInfo.header as |appInfoHeader|}}
+						{{appInfoHeader.statusIndicator}}
 						{{appInfoHeader.actionsPanel
 							onEditApp=(route-action "onEditApp")
 							onDeleteApp=(route-action "onDeleteApp")
 							onSetAppStatus=(route-action "onSetAppStatus")
 						}}
-						{{appInfoHeader.statusIndicator}}
 					{{/appInfo.header}}
 
 					{{#appInfo.content}}

@@ -1,6 +1,9 @@
 <span class="h4" {{action (action onClick) app}}>
 	{{bs-glyphicon icon=(if expanded "chevron-up" "chevron-down") class="btn"}}
 	{{app.name}}
+	{{#unless (can "create app")}}
+		<small>by {{app.createdBy.name}}</small>
+	{{/unless}}
 </span>
 
 {{yield (hash
