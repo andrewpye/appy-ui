@@ -1,7 +1,7 @@
 {{#bs-form formLayout="inline" tagName="span" model=filterSettings as |form|}}
 	{{#if (can "create app")}}
-		{{form.element controlType="checkbox" label="Draft" property="draft"}}
+		{{form.element controlType="checkbox" label="Draft" property="draft" class="checkbox-inline"}}
 	{{/if}}
-	{{form.element controlType="checkbox" label="Submitted" property="submitted"}}
-	{{form.element controlType="checkbox" label="Approved" property="approved"}}
+	{{form.element controlType="checkbox" label="Submitted" property="submitted" class="checkbox-inline"}}
+	{{form.element controlType="checkbox" label="Approved" property="approved" class="checkbox-inline"}}
 {{/bs-form}}
