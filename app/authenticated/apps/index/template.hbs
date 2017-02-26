@@ -9,7 +9,9 @@
 			</li>
 		{{/each}}
 	</ul>
-	{{#link-to "authenticated.apps.new"}}Add another app...{{/link-to}}
+	{{#if (can "create app")}}
+		{{#link-to "authenticated.apps.new"}}Add another app...{{/link-to}}
+	{{/if}}
 {{else}}
 	{{#centered-content}}
 		{{#if (can "create app")}}
