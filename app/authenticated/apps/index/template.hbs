@@ -1,12 +1,17 @@
 {{#if model.length}}
 	<div class="h2">
 		<span>Your apps</span>
-		{{#if (can "create app")}}
-			{{#link-to "authenticated.apps.new" class="btn btn-primary pull-right"}}New...{{/link-to}}
-		{{/if}}
+		<span class="pull-right">
+			{{!-- Checkboxes for filtering apps by status --}}
+			<span>Show: {{app-filter-settings filterSettings=appFilterSettings}}</span>
+
+			{{#if (can "create app")}}
+				{{#link-to "authenticated.apps.new" class="btn btn-primary"}}New...{{/link-to}}
+			{{/if}}
+		</span>
 	</div>
 	<ul class="list-group">
-		{{#each model as |app|}}
+		{{#each filteredApps as |app|}}
 			<li class="list-group-item">
 				{{#app-info
 					app=app
@@ -29,6 +34,10 @@
 					{{/appInfo.content}}
 				{{/app-info}}
 			</li>
+		{{else}}
+			<h3>
+				<div>No apps match your current filter settings</div>
+			</h3>
 		{{/each}}
 	</ul>
 {{else}}
