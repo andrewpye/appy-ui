@@ -1,12 +1,12 @@
 {{#if (can "edit app" app)}}
-	<button {{action onEditApp app}} class="btn btn-sm">
+	<button {{action onEditApp app}} class="btn btn-default btn-sm">
 		{{#bs-tooltip}}Edit{{/bs-tooltip}}
 		{{bs-glyphicon icon="pencil"}}
 	</button>
 {{/if}}
 
 {{#if (can "delete app" app)}}
-	<button {{action onDeleteApp app}} class="btn btn-sm">
+	<button {{action onDeleteApp app}} class="btn btn-default btn-sm">
 		{{#bs-tooltip}}Delete{{/bs-tooltip}}
 		{{bs-glyphicon icon="remove"}}
 	</button>
@@ -14,12 +14,12 @@
 
 {{#if (can "publish app" app)}}
 	{{#if (eq app.status "draft")}}
-		{{#async-button action=(action onSetAppStatus app "submitted") class="btn btn-sm"}}
+		{{#async-button action=(action onSetAppStatus app "submitted") class="btn btn-default btn-sm"}}
 			{{#bs-tooltip}}Submit{{/bs-tooltip}}
 			{{bs-glyphicon icon="ok-circle"}}
 		{{/async-button}}
 	{{else}}
-		{{#async-button action=(action onSetAppStatus app "draft") class="btn btn-sm"}}
+		{{#async-button action=(action onSetAppStatus app "draft") class="btn btn-default btn-sm"}}
 			{{#bs-tooltip}}Unsubmit{{/bs-tooltip}}
 			{{bs-glyphicon icon="remove-circle"}}
 		{{/async-button}}
@@ -28,12 +28,12 @@
 
 {{#if (can "approve app" app)}}
 	{{#if (eq app.status "submitted")}}
-		{{#async-button action=(action onSetAppStatus app "approved") class="btn btn-sm"}}
+		{{#async-button action=(action onSetAppStatus app "approved") class="btn btn-default btn-sm"}}
 			{{#bs-tooltip}}Publish{{/bs-tooltip}}
 			{{bs-glyphicon icon="ok-circle"}}
 		{{/async-button}}
 	{{else}}
-		{{#async-button action=(action onSetAppStatus app "submitted") class="btn btn-sm"}}
+		{{#async-button action=(action onSetAppStatus app "submitted") class="btn btn-default btn-sm"}}
 			{{#bs-tooltip}}Unpublish{{/bs-tooltip}}
 			{{bs-glyphicon icon="remove-circle"}}
 		{{/async-button}}
