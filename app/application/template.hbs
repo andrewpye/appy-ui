@@ -1,3 +1,15 @@
-<div class="application-container">
+{{#bs-navbar fluid=true as |navbar|}}
+	<div class="navbar-header">
+		<a class="navbar-brand">Appy</a>
+	</div>
+
+	{{#navbar.content}}
+		{{#if session.isAuthenticated}}
+			<button class="btn btn-default navbar-btn navbar-right" {{action "logOut"}}>Log out</button>
+		{{/if}}
+	{{/navbar.content}}
+{{/bs-navbar}}
+
+<div class="container-fluid">
 	{{outlet}}
 </div>

@@ -1,9 +1,8 @@
 @import "ember-bootstrap/bootstrap";
 
-.application-container {
+html {
 	width: 100vw;
 	height: 100vh;
-	overflow: hidden;
 }
 
 .center {
@@ -16,9 +15,11 @@
 
 span {
 	&.app-status {
+		display: inline-block;
 		border: 1px solid;
 		border-radius: 3px;
 		padding: 5px 10px;
+		cursor: default;
 
 		&.draft {
 			color: red;
