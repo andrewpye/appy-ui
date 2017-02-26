@@ -4,7 +4,11 @@
 		{{#each model as |app|}}
 			<li class="list-group-item">
 				{{#app-info app=app as |appInfo|}}
-					{{appInfo.actionsPanel}}
+					{{appInfo.actionsPanel
+						onEditApp=(route-action "onEditApp")
+						onDeleteApp=(route-action "onDeleteApp")
+						onSetAppStatus=(route-action "onSetAppStatus")
+					}}
 				{{/app-info}}
 			</li>
 		{{/each}}
