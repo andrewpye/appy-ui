@@ -8,12 +8,25 @@
 	<ul class="list-group">
 		{{#each model as |app|}}
 			<li class="list-group-item">
-				{{#app-info app=app as |appInfo|}}
-					{{appInfo.actionsPanel
-						onEditApp=(route-action "onEditApp")
-						onDeleteApp=(route-action "onDeleteApp")
-						onSetAppStatus=(route-action "onSetAppStatus")
-					}}
+				{{#app-info
+					app=app
+					expanded=(eq app selectedApp)
+					onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
+					as |appInfo|
+				}}
+					{{#appInfo.header as |appInfoHeader|}}
+						{{appInfoHeader.actionsPanel
+							onEditApp=(route-action "onEditApp")
+							onDeleteApp=(route-action "onDeleteApp")
+							onSetAppStatus=(route-action "onSetAppStatus")
+						}}
+						{{appInfoHeader.statusIndicator}}
+					{{/appInfo.header}}
+
+					{{#appInfo.content}}
+						<hr />
+						{{app.description}}
+					{{/appInfo.content}}
 				{{/app-info}}
 			</li>
 		{{/each}}
