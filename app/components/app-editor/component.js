@@ -6,6 +6,8 @@ const { Component } = Ember;
 export default Component.extend({
 	appValidations,
 
+	submitButtonText: 'Save',
+
 	// Default handlers to be overridden by attributes.
 	onSave () {},
 	onCancel () {}
