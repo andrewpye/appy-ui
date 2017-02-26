@@ -1,4 +1,7 @@
-<span class="h4" {{action (action onClick) app}}>{{app.name}}</span>
+<span class="h4" {{action (action onClick) app}}>
+	{{bs-glyphicon icon=(if expanded "chevron-up" "chevron-down") class="btn"}}
+	{{app.name}}
+</span>
 
 {{yield (hash
 	header=(component "app-info/header" app=app)
