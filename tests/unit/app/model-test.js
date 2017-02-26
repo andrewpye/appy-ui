@@ -1,8 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('app', 'Unit | Model | app', {
-  // Specify the other units that are required for this test.
-  needs: []
+  needs: [ 'model:user', 'util:app-status' ]
 });
 
 test('it exists', function(assert) {

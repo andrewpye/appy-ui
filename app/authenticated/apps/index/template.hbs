@@ -1,0 +1,48 @@
+{{#if model.length}}
+	<div class="h2">
+		<span>Your apps</span>
+		{{#if (can "create app")}}
+			{{#link-to "authenticated.apps.new" class="btn btn-primary pull-right"}}New...{{/link-to}}
+		{{/if}}
+	</div>
+	<ul class="list-group">
+		{{#each model as |app|}}
+			<li class="list-group-item">
+				{{#app-info
+					app=app
+					expanded=(eq app selectedApp)
+					onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
+					as |appInfo|
+				}}
+					{{#appInfo.header as |appInfoHeader|}}
+						{{appInfoHeader.actionsPanel
+							onEditApp=(route-action "onEditApp")
+							onDeleteApp=(route-action "onDeleteApp")
+							onSetAppStatus=(route-action "onSetAppStatus")
+						}}
+						{{appInfoHeader.statusIndicator}}
+					{{/appInfo.header}}
+
+					{{#appInfo.content}}
+						<hr />
+						{{app.description}}
+					{{/appInfo.content}}
+				{{/app-info}}
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	{{#centered-content}}
+		{{#if (can "create app")}}
+			<h3>
+				<div>You don't have any apps yet!</div>
+				<small>{{#link-to "authenticated.apps.new"}}Click here{{/link-to}} to create one</small>
+			</h3>
+		{{else}}
+			<h3>
+				<div>It doesn't look like anybody's submitted any apps yet...</div>
+				<small>Come back again later!</small>
+			</h3>
+		{{/if}}
+	{{/centered-content}}
+{{/if}}
