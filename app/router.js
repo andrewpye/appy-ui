@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('authenticated', { path: '/' }, function() {
     this.route('apps', function() {
       this.route('new');
+      this.route('edit', { path: ':app_id' });
     });
   });
   this.route('login');
