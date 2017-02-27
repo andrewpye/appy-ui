@@ -24,7 +24,7 @@ export default Route.extend(CanMixin, CurrentUserMixin, {
 		const app = get(this, 'controller.model');
 		if (app && get(app, 'isNew'))
 		{
-			const file = get(app, 'image');
+			const file = get(app, 'image.content');
 
 			// Unload the records.
 			file.rollbackAttributes();

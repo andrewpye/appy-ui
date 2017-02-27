@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Route, get, set } = Ember;
+const { Route, get, set, RSVP: { resolve } } = Ember;
 
 export default Route.extend({
 	model () {
@@ -8,17 +8,32 @@ export default Route.extend({
 	},
 
 	actions: {
- 		onSaveAppChanges (changeset) {
- 			const savePromise = changeset.save();
- 			this.transitionTo('authenticated.apps');
+		onSaveAppChanges (app, changeset) {
+			// Save the file if needed.
+			return get(app, 'image')
+			.then(file => {
+				return get(file, 'localFile') ? file.save() : resolve();
+			})
+			.then(() => {
+				return changeset.save()
+				.then(() => this.transitionTo('authenticated.apps'));
+			})
+			.catch(error => {
+				// TODO: display error.
+				console.log(error);
+			});
+		},
 
- 			return savePromise;
- 		},
+		onCancelAppChanges (app, changeset) {
+			// Nullify the local file on the file model.
+			return get(app, 'image')
+			.then(file => {
+				set(file, 'localFile', null);
 
- 		onCancelAppChanges (changeset) {
- 			changeset.rollback();
- 			this.transitionTo('authenticated.apps');
- 		},
+				changeset.rollback();
+				this.transitionTo('authenticated.apps');
+			});
+		},
 
 		onEditApp (app) {
 			this.transitionTo('authenticated.apps.edit', app);
