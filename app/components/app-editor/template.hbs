@@ -3,6 +3,27 @@
 		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name"}}
 		{{form.element controlType="textarea" label="Description" placeholder="Give a brief description of the app" property="description"}}
 
+		{{#form.element label="Image" placeholder="Choose a picture for your app"}}
+			{{#file-dropzone name="app-image" as |dropzone queue|}}
+				{{#if dropzone.active}}
+					{{#if dropzone.valid}}
+						Drop to choose image
+					{{else}}
+						Drag and drop isn't supported
+					{{/if}}
+				{{else}}
+					{{#file-upload
+						name="app-image"
+						accept="image/*"
+						multiple=false
+						onfileadd=(action (mut app.image.localFile))
+					}}
+						<a id="upload-image" class="btn btn-default">Choose a picture</a>
+					{{/file-upload}}
+				{{/if}}
+			{{/file-dropzone}}
+		{{/form.element}}
+
 		{{yield}}
 
 		{{bs-button defaultText="Cancel" type="secondary" buttonType="button" click=(action onCancel changeset)}}
