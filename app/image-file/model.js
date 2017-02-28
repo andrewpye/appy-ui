@@ -16,11 +16,13 @@ export default DS.Model.extend({
 	localFile: null,
 
 	save () {
+		const _super = this._super;
+
 		// Ensure the data's loaded as base64 before saving.
 		return get(this, 'fileReader').readBase64Data(get(this, 'localFile'))
 		.then(base64Data => {
 			set(this, 'base64Data', base64Data);
-			return this._super(...arguments);
+			return _super.apply(this, arguments);
 		});
 	}
 });
