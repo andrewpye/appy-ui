@@ -1,13 +1,24 @@
 import Ember from 'ember';
 import { task } from 'ember-concurrency';
 
-const { Component, inject, computed, observer, get, set, RSVP } = Ember;
+const { Component, inject, on, computed, observer, get, set, RSVP } = Ember;
 
 export default Component.extend({
 	tagName: 'span',
 	classNames: [ 'image-preview' ],
 
 	fileReader: inject.service(),
+
+	_triggerImageLoad: on('didReceiveAttrs', function () {
+		if (get(this, 'imageFile.localFile'))
+		{
+			this._loadLocalImage();
+		}
+		else if (get(this, 'imageFile.url'))
+		{
+			this._preloadRemoteImage();
+		}
+	}),
 
 	// Preview an image from local data if it's available, or from the server.
 	src: computed.or('_localSrc', '_remoteSrc'),
