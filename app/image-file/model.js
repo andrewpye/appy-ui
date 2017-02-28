@@ -10,7 +10,7 @@ export default DS.Model.extend({
 	url: DS.attr(),
 
 	// Local data for use before/during upload.
-	base64Data: DS.attr('string'),
+	base64Data: DS.attr('string', { defaultValue: null }),
 
 	// Pointer to a local file before it gets uploaded.
 	localFile: null,

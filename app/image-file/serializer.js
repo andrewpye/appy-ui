@@ -36,6 +36,9 @@ export default DS.JSONAPISerializer.extend({
 			attrs.url = attrs.url.url || null;
 		}
 
+		// Clean up in-memory images.
+		attrs.base64Data = null;
+
 		return response;
 	}
 });
