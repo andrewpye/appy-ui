@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import { task } from 'ember-concurrency';
 
-const { Component, computed, observer, get, set, RSVP } = Ember;
+const { Component, inject, computed, observer, get, set, RSVP } = Ember;
 
 export default Component.extend({
 	tagName: 'span',
-	attributeBindings: [ 'src' ],
+	classNames: [ 'image-preview' ],
+
+	fileReader: inject.service(),
 
 	// Preview an image from local data if it's available, or from the server.
 	src: computed.or('_localSrc', '_remoteSrc'),
@@ -13,11 +15,30 @@ export default Component.extend({
 	// Local source is just the in-memory file as a data URL.
 	_localSrc: computed.alias('imageFile.base64Data'),
 
+	_loadLocalImage: observer('imageFile.localFile', function () {
+		// Read the file into memory when the local file changes.
+		const localFile = get(this, 'imageFile.localFile') || null;
+
+		get(this, '_loadLocalImageTask').perform(localFile);
+	}),
+
+	// Restartable task to preload the remote image.
+	_loadLocalImageTask: task(function* (localFile) {
+		let dataUrl = null;
+
+		if (localFile)
+		{
+			dataUrl = yield get(this, 'fileReader').readBase64Data(localFile);
+		}
+
+		set(this, '_localSrc', dataUrl);
+	}).restartable(),
+
 	// Remote source is the uploaded file on the server after preloading.
 	_remoteSrc: null,
 
 	// Restartable task to preload the remote image.
-	_preloadImageTask: task(function* (src) {
+	_preloadRemoteImageTask: task(function* (src) {
 		if (src)
 		{
 			yield new RSVP.Promise((resolve, reject) => {
@@ -31,10 +52,10 @@ export default Component.extend({
 		set(this, '_remoteSrc', src);
 	}).restartable(),
 
-	_preloadImage: observer('imageFile.url', function () {
+	_preloadRemoteImage: observer('imageFile.url', function () {
 		// Start preloading the image when the URL changes.
 		const src = get(this, 'imageFile.url') || null;
 
-		get(this, '_preloadImageTask').perform(src);
+		get(this, '_preloadRemoteImageTask').perform(src);
 	})
 });

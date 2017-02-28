@@ -3,6 +3,7 @@
 		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name"}}
 		{{form.element controlType="textarea" label="Description" placeholder="Give a brief description of the app" property="description"}}
 
+		{{image-preview imageFile=app.image}}
 		{{#form.element label="Image" placeholder="Choose a picture for your app"}}
 			{{#file-dropzone name="app-image" as |dropzone queue|}}
 				{{#if dropzone.active}}
