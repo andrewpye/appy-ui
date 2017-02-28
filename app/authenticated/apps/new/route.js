@@ -15,7 +15,7 @@ export default Route.extend(CanMixin, CurrentUserMixin, {
 	model () {
 		const store = get(this, 'store');
 		return store.createRecord('app', {
-			image: store.createRecord('file'),
+			image: store.createRecord('image-file'),
 			createdBy: get(this, 'currentUser')
 		});
 	},
@@ -24,10 +24,10 @@ export default Route.extend(CanMixin, CurrentUserMixin, {
 		const app = get(this, 'controller.model');
 		if (app && get(app, 'isNew'))
 		{
-			const file = get(app, 'image.content');
+			const imageFile = get(app, 'image.content');
 
 			// Unload the records.
-			file.rollbackAttributes();
+			imageFile.rollbackAttributes();
 			app.rollbackAttributes();
 		}
 	}

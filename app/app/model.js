@@ -5,7 +5,7 @@ export default DS.Model.extend({
 	name: DS.attr('string'),
 	description: DS.attr('string'),
 	status: DS.attr('string', { defaultValue: AppStatus.draft }),
-	image: DS.belongsTo('file'),
+	image: DS.belongsTo('image-file'),
 
 	createdBy: DS.belongsTo('user')
 });

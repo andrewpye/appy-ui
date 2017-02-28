@@ -9,10 +9,10 @@ export default Route.extend({
 
 	actions: {
 		onSaveAppChanges (app, changeset) {
-			// Save the file if needed.
+			// Save the image file if needed.
 			return get(app, 'image')
-			.then(file => {
-				return get(file, 'localFile') ? file.save() : resolve();
+			.then(imageFile => {
+				return get(imageFile, 'localFile') ? imageFile.save() : resolve();
 			})
 			.then(() => {
 				return changeset.save()
@@ -25,10 +25,10 @@ export default Route.extend({
 		},
 
 		onCancelAppChanges (app, changeset) {
-			// Nullify the local file on the file model.
+			// Nullify the local file on the image file model.
 			return get(app, 'image')
-			.then(file => {
-				set(file, 'localFile', null);
+			.then(imageFile => {
+				set(imageFile, 'localFile', null);
 
 				changeset.rollback();
 				this.transitionTo('authenticated.apps');
