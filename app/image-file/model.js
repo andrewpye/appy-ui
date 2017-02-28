@@ -7,7 +7,7 @@ export default DS.Model.extend({
 	fileReader: inject.service(),
 
 	// URL to access file after upload.
-	url: DS.attr('string'),
+	url: DS.attr(),
 
 	// Local data for use before/during upload.
 	base64Data: DS.attr('string'),
