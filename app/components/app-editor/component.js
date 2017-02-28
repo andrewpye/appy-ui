@@ -6,6 +6,8 @@ const { Component } = Ember;
 export default Component.extend({
 	appValidations,
 
+	classNames: [ 'app-editor' ],
+
 	submitButtonText: 'Save',
 
 	// Default handlers to be overridden by attributes.
