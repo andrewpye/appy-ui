@@ -9,7 +9,8 @@ export default Component.extend({
 
 	fileReader: inject.service(),
 
-	_triggerImageLoad: on('didReceiveAttrs', function () {
+	// This is needed to trigger image loading in some cases.
+	_triggerImageLoad: on('init', function () {
 		if (get(this, 'imageFile.localFile'))
 		{
 			this._loadLocalImage();
