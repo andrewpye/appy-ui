@@ -1,8 +1,10 @@
 {{#centered-content}}
 	<h2>
 		<div>Welcome back, {{currentUser.name}}!</div>
-		<small>
-			{{#link-to "authenticated.apps" class="btn btn-default"}}Manage {{if (can "create app") "your" "submitted"}} apps{{/link-to}}
+		<small class="pull-right">
+			{{#link-to "authenticated.apps" class="btn btn-default"}}
+				Manage {{if (can "create app") "your" "submitted"}} apps {{bs-glyphicon icon="chevron-right"}}
+			{{/link-to}}
 		</small>
 	</h2>
 {{/centered-content}}
