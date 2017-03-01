@@ -1,6 +1,8 @@
 {{bs-glyphicon icon=(if expanded "menu-up" "menu-down") class="btn dropdown-icon"}}
 {{image-preview imageFile=app.image}}
-<span class="app-name">{{app.name}}</span>
-{{#unless (can "create app")}}
-	<small>by {{app.createdBy.name}}</small>
-{{/unless}}
+<span class="app-name">
+	{{app.name}}
+	{{#unless (can "create app")}}
+		<small>by {{app.createdBy.name}}</small>
+	{{/unless}}
+</span>
