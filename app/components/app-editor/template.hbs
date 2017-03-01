@@ -1,11 +1,34 @@
 {{#with (changeset app appValidations) as |changeset|}}
-	{{#bs-form formLayout="vertical" model=changeset onSubmit=(action onSave changeset) as |form|}}
+	{{#bs-form formLayout="vertical" model=changeset onSubmit=(action onSave app changeset) as |form|}}
 		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name"}}
 		{{form.element controlType="textarea" label="Description" placeholder="Give a brief description of the app" property="description"}}
 
+		{{#form.element label="Image" placeholder="Optional: choose a picture for your app"}}
+			<div>
+				{{#file-dropzone name="app-image" class="file-picker" as |dropzone queue|}}
+					{{#if dropzone.active}}
+						{{#if dropzone.valid}}
+							Drop to choose image
+						{{else}}
+							Drag and drop isn't supported
+						{{/if}}
+					{{else}}
+						{{#file-upload
+							name="app-image"
+							accept="image/*"
+							multiple=false
+							onfileadd=(action (mut app.image.localFile))
+						}}
+							{{image-preview imageFile=app.image}}<a id="upload-image" class="btn btn-default" tabindex=0>Choose a picture</a>
+						{{/file-upload}}
+					{{/if}}
+				{{/file-dropzone}}
+			</div>
+		{{/form.element}}
+
 		{{yield}}
 
-		{{bs-button defaultText="Cancel" type="secondary" buttonType="button" click=(action onCancel changeset)}}
+		{{bs-button defaultText="Cancel" type="secondary" buttonType="button" click=(action onCancel app changeset)}}
 		{{bs-button defaultText=submitButtonText type="primary" buttonType="submit" class="pull-right"}}
 	{{/bs-form}}
 {{/with}}

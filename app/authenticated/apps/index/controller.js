@@ -16,6 +16,6 @@ export default Controller.extend({
 
 		return get(this, 'model').filter(app => {
 			return get(filterSettings, get(app, 'status'));
-		})
+		});
 	})
 });

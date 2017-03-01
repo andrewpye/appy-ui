@@ -13,17 +13,22 @@ export default Route.extend(CanMixin, CurrentUserMixin, {
 	},
 
 	model () {
-		return get(this, 'store').createRecord('app', {
+		const store = get(this, 'store');
+		return store.createRecord('app', {
+			image: store.createRecord('image-file'),
 			createdBy: get(this, 'currentUser')
 		});
 	},
 
 	deactivate () {
-		const model = get(this, 'controller.model');
-		if (model && get(model, 'isNew'))
+		const app = get(this, 'controller.model');
+		if (app && get(app, 'isNew'))
 		{
-			// Unload the record.
-			model.rollbackAttributes();
+			const imageFile = get(app, 'image.content');
+
+			// Unload the records.
+			imageFile.rollbackAttributes();
+			app.rollbackAttributes();
 		}
 	}
 });

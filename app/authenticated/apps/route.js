@@ -8,17 +8,32 @@ export default Route.extend({
 	},
 
 	actions: {
- 		onSaveAppChanges (changeset) {
- 			const savePromise = changeset.save();
- 			this.transitionTo('authenticated.apps');
+		onSaveAppChanges (app, changeset) {
+			// Save the image file if needed.
+			return get(app, 'image')
+			.then(imageFile => {
+				return imageFile.save();
+			})
+			.then(() => {
+				return changeset.save()
+				.then(() => this.transitionTo('authenticated.apps'));
+			})
+			.catch(error => {
+				// TODO: display error.
+				console.log(error);
+			});
+		},
 
- 			return savePromise;
- 		},
+		onCancelAppChanges (app, changeset) {
+			// Nullify the local file on the image file model.
+			return get(app, 'image')
+			.then(imageFile => {
+				set(imageFile, 'localFile', null);
 
- 		onCancelAppChanges (changeset) {
- 			changeset.rollback();
- 			this.transitionTo('authenticated.apps');
- 		},
+				changeset.rollback();
+				this.transitionTo('authenticated.apps');
+			});
+		},
 
 		onEditApp (app) {
 			this.transitionTo('authenticated.apps.edit', app);
