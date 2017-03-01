@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Route, get, set, RSVP: { resolve } } = Ember;
+const { Route, get, set } = Ember;
 
 export default Route.extend({
 	model () {
@@ -12,7 +12,7 @@ export default Route.extend({
 			// Save the image file if needed.
 			return get(app, 'image')
 			.then(imageFile => {
-				return get(imageFile, 'localFile') ? imageFile.save() : resolve();
+				return imageFile.save();
 			})
 			.then(() => {
 				return changeset.save()
