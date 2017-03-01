@@ -1,4 +1,6 @@
-{{yield (hash
-	actionsPanel=(component "app-actions-panel" app=app)
-	statusIndicator=(component "app-status-indicator" app=app)
-)}}
+{{bs-glyphicon icon=(if expanded "menu-up" "menu-down") class="btn dropdown-icon"}}
+{{image-preview imageFile=app.image}}
+<span class="app-name">{{app.name}}</span>
+{{#unless (can "create app")}}
+	<small>by {{app.createdBy.name}}</small>
+{{/unless}}

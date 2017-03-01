@@ -19,7 +19,8 @@
 							multiple=false
 							onfileadd=(action (mut app.image.localFile))
 						}}
-							{{image-preview imageFile=app.image}}<a id="upload-image" class="btn btn-default" tabindex=0>Choose a picture</a>
+							{{image-preview imageFile=app.image class="pull-left"}}
+							<a id="upload-image" class="btn btn-default" tabindex=0>Choose a picture</a>
 						{{/file-upload}}
 					{{/if}}
 				{{/file-dropzone}}

@@ -29,20 +29,21 @@
 						onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
 						as |appInfo|
 					}}
-						{{#appInfo.header as |appInfoHeader|}}
+						{{appInfo.header}}
+						{{#appInfo.controls as |appInfoControls|}}
 							<ul class="list-inline">
 								<li>
-									{{appInfoHeader.statusIndicator}}
+									{{appInfoControls.statusIndicator}}
 								</li>
 								<li>
-									{{appInfoHeader.actionsPanel
+									{{appInfoControls.actionsPanel
 										onEditApp=(route-action "onEditApp")
 										onDeleteApp=(route-action "onDeleteApp")
 										onSetAppStatus=(route-action "onSetAppStatus")
 									}}
 								</li>
 							</ul>
-						{{/appInfo.header}}
+						{{/appInfo.controls}}
 
 						{{#appInfo.content}}
 							<hr />
