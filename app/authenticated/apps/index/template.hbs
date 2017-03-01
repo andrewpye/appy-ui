@@ -1,8 +1,8 @@
 {{#if model.length}}
-	<p class="header">
-		<span class="h2">
+	{{#page-layout/header as |header|}}
+		{{#header.title}}
 			{{if (can "create app") "Your" "Submitted"}} apps
-		</span>
+		{{/header.title}}
 		<span class="pull-right">
 			<ul class="list-inline">
 				{{!-- Checkboxes for filtering apps by status --}}
@@ -17,44 +17,46 @@
 				{{/if}}
 			</ul>
 		</span>
-	</p>
+	{{/page-layout/header}}
 
-	<ul class="list-group">
-		{{#each filteredApps as |app|}}
-			<li class="list-group-item">
-				{{#app-info
-					app=app
-					expanded=(eq app selectedApp)
-					onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
-					as |appInfo|
-				}}
-					{{#appInfo.header as |appInfoHeader|}}
-						<ul class="list-inline">
-							<li>
-								{{appInfoHeader.statusIndicator}}
-							</li>
-							<li>
-								{{appInfoHeader.actionsPanel
-									onEditApp=(route-action "onEditApp")
-									onDeleteApp=(route-action "onDeleteApp")
-									onSetAppStatus=(route-action "onSetAppStatus")
-								}}
-							</li>
-						</ul>
-					{{/appInfo.header}}
+	{{#page-layout/content}}
+		<ul class="list-group">
+			{{#each filteredApps as |app|}}
+				<li class="list-group-item">
+					{{#app-info
+						app=app
+						expanded=(eq app selectedApp)
+						onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
+						as |appInfo|
+					}}
+						{{#appInfo.header as |appInfoHeader|}}
+							<ul class="list-inline">
+								<li>
+									{{appInfoHeader.statusIndicator}}
+								</li>
+								<li>
+									{{appInfoHeader.actionsPanel
+										onEditApp=(route-action "onEditApp")
+										onDeleteApp=(route-action "onDeleteApp")
+										onSetAppStatus=(route-action "onSetAppStatus")
+									}}
+								</li>
+							</ul>
+						{{/appInfo.header}}
 
-					{{#appInfo.content}}
-						<hr />
-						{{app.description}}
-					{{/appInfo.content}}
-				{{/app-info}}
-			</li>
-		{{else}}
-			<h4>
-				<div>No apps match your current filter settings</div>
-			</h4>
-		{{/each}}
-	</ul>
+						{{#appInfo.content}}
+							<hr />
+							{{app.description}}
+						{{/appInfo.content}}
+					{{/app-info}}
+				</li>
+			{{else}}
+				<h4>
+					<div>No apps match your current filter settings</div>
+				</h4>
+			{{/each}}
+		</ul>
+	{{/page-layout/content}}
 {{else}}
 	{{#centered-content}}
 		{{#if (can "create app")}}

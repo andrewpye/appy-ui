@@ -1,1 +1,13 @@
-{{app-editor app=model onSave=(route-action "onSaveAppChanges") onCancel=(route-action "onCancelAppChanges")}}
+{{#page-layout/header as |header|}}
+	{{#header.title}}
+		Edit your app
+	{{/header.title}}
+{{/page-layout/header}}
+
+{{#page-layout/content}}
+	{{app-editor
+		app=model
+		onSave=(route-action "onSaveAppChanges")
+		onCancel=(route-action "onCancelAppChanges")
+	}}
+{{/page-layout/content}}
