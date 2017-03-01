@@ -1,5 +1,5 @@
 <span class="h4" {{action (action onClick) app}}>
-	{{bs-glyphicon icon=(if expanded "chevron-up" "chevron-down") class="btn"}}
+	{{bs-glyphicon icon=(if expanded "menu-up" "menu-down") class="btn"}}
 	{{image-preview imageFile=app.image}}
 	{{app.name}}
 	{{#unless (can "create app")}}
