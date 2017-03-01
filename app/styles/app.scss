@@ -5,6 +5,10 @@ html {
   height: 100vh;
 }
 
+* {
+  transition: all 0.3s ease;
+}
+
 .center {
   display: flex;
   align-items: center;
