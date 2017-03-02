@@ -131,3 +131,46 @@ span {
     }
 }
 
+.app-filter-settings {
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked + label {
+      background: none;
+
+      &::after {
+        content: "\e013";
+        color: green;
+      }
+    }
+  }
+
+  label {
+    margin-right: 4px;
+    border: 1px solid lightgrey;
+    background: lightgrey;
+
+    &::after {
+      font-family: 'Glyphicons Halflings';
+      content: "\e014";
+      color: red;
+      margin-left: 5px;
+      margin-right: -1px;
+      vertical-align: bottom;
+    }
+
+/*
+    &[for="draft-app-filter-checkbox"] {
+      color: red;
+    }
+
+    &[for="submitted-app-filter-checkbox"] {
+      color: orange;
+    }
+
+    &[for="approved-app-filter-checkbox"] {
+      color: green;
+    }
+*/
+  }
+}
