@@ -18,9 +18,12 @@ export default Route.extend({
 				}
 			})
 			.then(() => {
-				return changeset.save()
-				.then(() => this.transitionTo('authenticated.apps'));
+				if (get(changeset, 'isDirty'))
+				{
+					return changeset.save();
+				}
 			})
+			.then(() => this.transitionTo('authenticated.apps'))
 			.catch(error => {
 				// TODO: display error.
 				console.log(error);
