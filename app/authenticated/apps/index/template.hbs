@@ -26,10 +26,9 @@
 					{{#app-info
 						app=app
 						expanded=(eq app selectedApp)
-						onClick=(action (mut selectedApp) (if (not-eq selectedApp app) app))
 						as |appInfo|
 					}}
-						{{appInfo.header}}
+						{{appInfo.header click=(action (mut selectedApp) (if (not-eq selectedApp app) app))}}
 						{{#appInfo.controls as |appInfoControls|}}
 							<ul class="list-inline">
 								<li>
