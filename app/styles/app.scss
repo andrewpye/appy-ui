@@ -88,10 +88,13 @@ span {
 
   .glyphicon {
     display: inline-block;
-    font-size: 40px;
     line-height: 45px;
-    height: 100%;
-    width: auto;
+
+    &.glyphicon-picture {
+      height: 100%;
+      width: auto;
+      font-size: 40px;
+    }
   }
 
   img {
