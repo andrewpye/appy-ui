@@ -20,42 +20,38 @@
 	{{/page-layout/header}}
 
 	{{#page-layout/content}}
-		<ul class="list-group">
-			{{#each filteredApps as |app|}}
-				<li class="list-group-item">
-					{{#app-info
-						app=app
-						expanded=(eq app selectedApp)
-						as |appInfo|
-					}}
-						{{appInfo.header click=(action (mut selectedApp) (if (not-eq selectedApp app) app))}}
-						{{#appInfo.controls as |appInfoControls|}}
-							<ul class="list-inline">
-								<li>
-									{{appInfoControls.statusIndicator}}
-								</li>
-								<li>
-									{{appInfoControls.actionsPanel
-										onEditApp=(route-action "onEditApp")
-										onDeleteApp=(route-action "onDeleteApp")
-										onSetAppStatus=(route-action "onSetAppStatus")
-									}}
-								</li>
-							</ul>
-						{{/appInfo.controls}}
+		{{#each filteredApps as |app|}}
+			{{#app-info
+				app=app
+				expanded=(eq app selectedApp)
+				as |appInfo|
+			}}
+				{{appInfo.header click=(action (mut selectedApp) (if (not-eq selectedApp app) app))}}
+				{{#appInfo.controls as |appInfoControls|}}
+					<ul class="list-inline">
+						<li>
+							{{appInfoControls.statusIndicator}}
+						</li>
+						<li>
+							{{appInfoControls.actionsPanel
+								onEditApp=(route-action "onEditApp")
+								onDeleteApp=(route-action "onDeleteApp")
+								onSetAppStatus=(route-action "onSetAppStatus")
+							}}
+						</li>
+					</ul>
+				{{/appInfo.controls}}
 
-						{{#appInfo.content}}
-							<hr />
-							{{app.description}}
-						{{/appInfo.content}}
-					{{/app-info}}
-				</li>
-			{{else}}
-				<h4>
-					<div>No apps match your current filter settings</div>
-				</h4>
-			{{/each}}
-		</ul>
+				{{#appInfo.content}}
+					<hr />
+					{{app.description}}
+				{{/appInfo.content}}
+			{{/app-info}}
+		{{else}}
+			<h4>
+				<div>No apps match your current filter settings</div>
+			</h4>
+		{{/each}}
 	{{/page-layout/content}}
 {{else}}
 	{{#centered-content}}

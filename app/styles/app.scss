@@ -42,12 +42,17 @@ span {
 }
 
 .app-info {
-  .dropdown-icon {
-    float: left;
-    margin-top: 11px;
-  }
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  padding: 6px 8px 2px 4px;
+  margin-bottom: 4px;
 
   .app-info-header {
+    .dropdown-icon {
+      float: left;
+      margin-top: 11px;
+    }
+
     .app-name {
       vertical-align: top;
       margin-top: 20px;
