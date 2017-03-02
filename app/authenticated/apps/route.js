@@ -12,7 +12,10 @@ export default Route.extend({
 			// Save the image file if needed.
 			return get(app, 'image')
 			.then(imageFile => {
-				return imageFile.save();
+				if (get(imageFile, 'hasDirtyAttributes'))
+				{
+					return imageFile.save();
+				}
 			})
 			.then(() => {
 				return changeset.save()
@@ -25,10 +28,13 @@ export default Route.extend({
 		},
 
 		onCancelAppChanges (app, changeset) {
-			// Nullify the local file on the image file model.
+			// Roll back any changes to the image file.
 			return get(app, 'image')
 			.then(imageFile => {
-				set(imageFile, 'localFile', null);
+				if (get(imageFile, 'hasDirtyAttributes'))
+				{
+					imageFile.rollbackAttributes();
+				}
 
 				changeset.rollback();
 				this.transitionTo('authenticated.apps');
