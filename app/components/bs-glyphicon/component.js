@@ -5,7 +5,7 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
 	tagName: 'span',
 	classNames: [ 'glyphicon' ],
-	classNameBindings: [ 'glyphName' ],
+	classNameBindings: [ 'glyphName', 'spin:glyphicon-spin' ],
 
 	glyphName: computed('icon', {
 		get () {

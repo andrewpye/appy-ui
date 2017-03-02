@@ -20,6 +20,8 @@ html {
 span {
   &.app-status {
     display: inline-block;
+    text-align: center;
+    width: 84px;
     border: 1px solid;
     border-radius: 3px;
     padding: 5px 10px;
@@ -39,10 +41,45 @@ span {
   }
 }
 
+.app-info {
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  padding: 6px 8px 2px 4px;
+  margin-bottom: 4px;
+
+  .app-info-header {
+    .dropdown-icon {
+      float: left;
+      margin-top: 11px;
+    }
+
+    .app-name {
+      vertical-align: top;
+      margin-top: 20px;
+      display:  inline-block;
+      cursor: pointer;
+    }
+  }
+
+  .app-info-controls {
+    float: right;
+    margin-top: 12px;
+  }
+
+  .app-info-content {
+    padding: 10px;
+
+    & hr {
+      margin-top: 0px;
+      margin-bottom: 14px;
+    }
+  }
+}
+
 .image-preview {
   width: 50px;
   height: 50px;
-  position: fixed;
+  display: inline-block;
   text-align: center;
   margin: 3px;
   border: 1px solid lightgrey;
@@ -50,22 +87,94 @@ span {
   overflow: hidden;
 
   .glyphicon {
+    display: inline-block;
     font-size: 40px;
-    line-height: 50px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    line-height: 45px;
     height: 100%;
     width: auto;
-    transform: translate(-50%, -50%);
   }
 
-  img  {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+  img {
+    width: 100%;
     height: 100%;
-    width: auto;
-    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }
+}
+
+#upload-image {
+  margin-top:  4px;
+  margin-left:  10px;
+}
+
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+.new-app-button {
+  margin-left: 4px;
+}
+
+.app-filter-settings {
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked + label {
+      background: none;
+
+      &::after {
+        content: "\e013";
+        color: green;
+      }
+    }
+  }
+
+  label {
+    margin-left: 4px;
+    border: 1px solid lightgrey;
+    background: lightgrey;
+
+    &::after {
+      font-family: 'Glyphicons Halflings';
+      content: "\e014";
+      color: red;
+      margin-left: 5px;
+      margin-right: -1px;
+      vertical-align: bottom;
+    }
+
+/*
+    &[for="draft-app-filter-checkbox"] {
+      color: red;
+    }
+
+    &[for="submitted-app-filter-checkbox"] {
+      color: orange;
+    }
+
+    &[for="approved-app-filter-checkbox"] {
+      color: green;
+    }
+*/
   }
 }

@@ -8,7 +8,7 @@
 				{{#file-dropzone name="app-image" class="file-picker" as |dropzone queue|}}
 					{{#if dropzone.active}}
 						{{#if dropzone.valid}}
-							Drop to choose image
+							Drop to choose picture
 						{{else}}
 							Drag and drop isn't supported
 						{{/if}}
@@ -19,7 +19,10 @@
 							multiple=false
 							onfileadd=(action (mut app.image.localFile))
 						}}
-							{{image-preview imageFile=app.image}}<a id="upload-image" class="btn btn-default" tabindex=0>Choose a picture</a>
+							{{image-preview imageFile=app.image class="pull-left"}}
+							<a id="upload-image" class="btn btn-default" tabindex=0>
+								Choose a{{if (or app.image.base64Data app.image.url) "nother"}} picture
+							</a>
 						{{/file-upload}}
 					{{/if}}
 				{{/file-dropzone}}

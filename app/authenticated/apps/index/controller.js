@@ -3,6 +3,8 @@ import Ember from 'ember';
 const { Controller, computed, get } = Ember;
 
 export default Controller.extend({
+	selectedApp: null,
+
 	// OK for this to be a class variable since controllers are singletons.
 	appFilterSettings: Ember.Object.create({
 		draft: true,
