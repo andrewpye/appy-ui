@@ -29,12 +29,12 @@
 {{#if (can "approve app" app)}}
 	{{#if (eq app.status "submitted")}}
 		{{#async-button action=(action onSetAppStatus app "approved") class="btn btn-success btn-sm"}}
-			{{#bs-tooltip}}Publish{{/bs-tooltip}}
+			{{#bs-tooltip}}Approve{{/bs-tooltip}}
 			{{bs-glyphicon icon="ok-circle"}}
 		{{/async-button}}
 	{{else}}
 		{{#async-button action=(action onSetAppStatus app "submitted") class="btn btn-warning btn-sm"}}
-			{{#bs-tooltip}}Unpublish{{/bs-tooltip}}
+			{{#bs-tooltip}}Unapprove{{/bs-tooltip}}
 			{{bs-glyphicon icon="remove-circle"}}
 		{{/async-button}}
 	{{/if}}
