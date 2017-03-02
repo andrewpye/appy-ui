@@ -14,6 +14,7 @@ export default Component.extend({
 	submitButtonText: 'Save',
 
 	updateImageFileTask: task(function* (imageFile) {
+		// Load the image into memory as a data URL and update the model when we've got the data.
 		const dataUrl = imageFile ? yield get(this, 'fileReader').readBase64Data(imageFile) : null;
 		set(this, 'app.image.url', dataUrl);
 	}).restartable(),
