@@ -1,37 +1,24 @@
 {{#with (changeset app appValidations) as |changeset|}}
-	{{#bs-form formLayout="vertical" model=changeset onSubmit=(action onSave app changeset) as |form|}}
+	{{#bs-form formLayout="vertical" model=changeset onSubmit=(action "save" app changeset) as |form|}}
 		{{form.element controlType="text" label="Name" placeholder="What is your app called?" property="name"}}
 		{{form.element controlType="textarea" label="Description" placeholder="Give a brief description of the app" property="description"}}
 
 		{{#form.element label="Image" placeholder="Optional: choose a picture for your app"}}
-			<div>
-				{{#file-dropzone name="app-image" class="file-picker" as |dropzone queue|}}
-					{{#if dropzone.active}}
-						{{#if dropzone.valid}}
-							Drop to choose picture
-						{{else}}
-							Drag and drop isn't supported
-						{{/if}}
-					{{else}}
-						{{#file-upload
-							name="app-image"
-							accept="image/*"
-							multiple=false
-							onfileadd=(action (mut app.image.localFile))
-						}}
-							{{image-preview imageFile=app.image class="pull-left"}}
-							<a id="upload-image" class="btn btn-default" tabindex=0>
-								Choose a{{if (or app.image.base64Data app.image.url) "nother"}} picture
-							</a>
-						{{/file-upload}}
-					{{/if}}
-				{{/file-dropzone}}
-			</div>
+			{{#image-file-picker
+				name="app-image"
+				imageFile=app.image
+				onFileChosen=(perform updateImageFileTask)
+			}}
+				{{image-preview imageFile=app.image class="pull-left"}}
+				<a id="upload-image" class="btn btn-default" tabindex=0>
+					Choose a{{if app.image.url "nother"}} picture
+				</a>
+			{{/image-file-picker}}
 		{{/form.element}}
 
 		{{yield}}
 
-		{{bs-button defaultText="Cancel" type="secondary" buttonType="button" click=(action onCancel app changeset)}}
+		{{bs-button defaultText="Cancel" type="secondary" buttonType="button" click=(action "cancel" app changeset)}}
 		{{bs-button defaultText=submitButtonText type="primary" buttonType="submit" class="pull-right"}}
 	{{/bs-form}}
 {{/with}}
