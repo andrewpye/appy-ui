@@ -2,7 +2,7 @@ import Ember from 'ember';
 import appValidations from 'appy-ui/app/validations';
 import { task } from 'ember-concurrency';
 
-const { Component, inject, get, set } = Ember;
+const { Component, inject, get, set, RSVP: { resolve } } = Ember;
 
 export default Component.extend({
 	fileReader: inject.service(),
@@ -18,13 +18,13 @@ export default Component.extend({
 		set(this, 'app.image.url', dataUrl);
 	}).restartable(),
 
-	actions: {
-		save (...args) {
-			// Wait for any local image loading to finish.
-			return get(this, 'updateImageFileTask.last')
-			.then(() => this._safeFireAction('onSave', ...args));
-		},
+	saveChangesTask: task(function* (...args) {
+		// Wait for any local image loading to finish.
+		yield get(this, 'updateImageFileTask.last');
+		return yield this._safeFireAction('onSave', ...args);
+	}).drop(),
 
+	actions: {
 		cancel (...args) {
 			get(this, 'updateImageFileTask').cancelAll();
 			return this._safeFireAction('onCancel', ...args);
