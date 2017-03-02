@@ -131,6 +131,10 @@ span {
     }
 }
 
+.new-app-button {
+  margin-left: 4px;
+}
+
 .app-filter-settings {
   input[type="checkbox"] {
     display: none;
@@ -146,7 +150,7 @@ span {
   }
 
   label {
-    margin-right: 4px;
+    margin-left: 4px;
     border: 1px solid lightgrey;
     background: lightgrey;
 
