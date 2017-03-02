@@ -13,13 +13,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{styled-checkbox}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#styled-checkbox}}
-      template block text
-    {{/styled-checkbox}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

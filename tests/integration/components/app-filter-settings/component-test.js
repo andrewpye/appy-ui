@@ -12,14 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{app-filter-settings}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#app-filter-settings}}
-      template block text
-    {{/app-filter-settings}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  const text = this.$().text().trim().toLowerCase();
+  assert.ok(text.indexOf('submitted') > -1);
 });
