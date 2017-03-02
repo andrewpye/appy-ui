@@ -1,7 +1,13 @@
 {{#bs-form formLayout="inline" tagName="span" model=filterSettings as |form|}}
 	{{#if (can "create app")}}
-		{{form.element controlType="checkbox" label="Draft" property="draft" class="checkbox-inline"}}
+		{{#form.element}}
+			{{styled-checkbox label="Draft" name="draft-app-filter-checkbox" checked=filterSettings.draft}}
+		{{/form.element}}
 	{{/if}}
-	{{form.element controlType="checkbox" label="Submitted" property="submitted" class="checkbox-inline"}}
-	{{form.element controlType="checkbox" label="Approved" property="approved" class="checkbox-inline"}}
+	{{#form.element}}
+		{{styled-checkbox label="Submitted" name="submitted-app-filter-checkbox" checked=filterSettings.submitted}}
+	{{/form.element}}
+	{{#form.element}}
+		{{styled-checkbox label="Approved" name="approved-app-filter-checkbox" checked=filterSettings.approved}}
+	{{/form.element}}
 {{/bs-form}}
