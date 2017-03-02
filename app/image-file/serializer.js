@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
 	// Map image (server-side) to url (client-side).
-	keyForAttribute (key, method) {
+	keyForAttribute (key) {
 		return key === 'url' ? 'image' : this._super(...arguments);
 	},
 

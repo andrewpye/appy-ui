@@ -1,7 +1,4 @@
-import Ember from 'ember';
 import DS from 'ember-data';
-
-const { inject, get, set, RSVP: { resolve } } = Ember;
 
 export default DS.Model.extend({
 	// This attribute has two roles:

@@ -1,7 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('app', 'Unit | Model | app', {
-  needs: [ 'model:user', 'util:app-status' ]
+  needs: [ 'model:user', 'model:image-file', 'util:app-status' ]
 });
 
 test('it exists', function(assert) {

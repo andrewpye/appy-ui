@@ -2,7 +2,7 @@ import Ember from 'ember';
 import appValidations from 'appy-ui/app/validations';
 import { task } from 'ember-concurrency';
 
-const { Component, inject, get, set, RSVP: { resolve } } = Ember;
+const { Component, inject, get, set } = Ember;
 
 export default Component.extend({
 	fileReader: inject.service(),
