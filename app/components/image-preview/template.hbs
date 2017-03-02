@@ -1,5 +1,9 @@
-{{#if src}}
-	<img src={{src}}>
+{{#if _isLoading}}
+	{{loading-icon}}
 {{else}}
-	{{bs-glyphicon icon="picture"}}
+	{{#if src}}
+		<img src={{src}}>
+	{{else}}
+		{{bs-glyphicon icon="picture"}}
+	{{/if}}
 {{/if}}
