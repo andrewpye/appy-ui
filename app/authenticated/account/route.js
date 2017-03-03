@@ -9,12 +9,12 @@ export default Route.extend(CurrentUserMixin, {
 	},
 
 	actions: {
-		onSaveChanges () {
-
+		onSaveChanges (changeset) {
+			return changeset.save();
 		},
 
-		onCancelChanges () {
-
+		onCancelChanges (changeset) {
+			changeset.rollback();
 		}
 	}
 });
