@@ -1,4 +1,20 @@
 import Ember from 'ember';
+import CurrentUserMixin from 'appy-ui/mixins/current-user';
 
-export default Ember.Route.extend({
+const { Route, get } = Ember;
+
+export default Route.extend(CurrentUserMixin, {
+	model () {
+		return get(this, 'currentUser');
+	},
+
+	actions: {
+		onSaveChanges () {
+
+		},
+
+		onCancelChanges () {
+
+		}
+	}
 });
