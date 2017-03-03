@@ -12,6 +12,7 @@ Router.map(function() {
       this.route('new');
       this.route('edit', { path: ':app_id' });
     });
+    this.route('account');
   });
   this.route('login');
 });

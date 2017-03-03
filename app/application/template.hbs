@@ -5,6 +5,11 @@
 
 	{{#navbar.content}}
 		{{#if session.isAuthenticated}}
+			{{#navbar.nav as |nav|}}
+				{{#nav.item}}{{#nav.link-to "authenticated.apps"}}Apps{{/nav.link-to}}{{/nav.item}}
+				{{#nav.item}}{{#nav.link-to "authenticated.account"}}Account{{/nav.link-to}}{{/nav.item}}
+			{{/navbar.nav}}
+
 			<button class="btn btn-default navbar-btn navbar-right" {{action "logOut"}}>Log out</button>
 		{{/if}}
 	{{/navbar.content}}
