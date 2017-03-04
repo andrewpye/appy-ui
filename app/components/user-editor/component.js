@@ -2,7 +2,7 @@ import Ember from 'ember';
 import userValidations from 'appy-ui/user/validations';
 import { task } from 'ember-concurrency';
 
-const { Component, get, set } = Ember;
+const { Component, get } = Ember;
 
 export default Component.extend({
 	userValidations,
