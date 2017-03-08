@@ -1,0 +1,13 @@
+{{#page-layout/header as |header|}}
+	{{#header.title}}
+		Tell us about yourself
+	{{/header.title}}
+{{/page-layout/header}}
+
+{{#page-layout/content}}
+	{{user-editor
+		user=model
+		onSave=(route-action "onSaveChanges")
+		onCancel=(route-action "onCancelChanges")
+	}}
+{{/page-layout/content}}

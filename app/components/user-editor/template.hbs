@@ -1,0 +1,24 @@
+{{#with (changeset user userValidations) as |changeset|}}
+	{{#bs-form formLayout="vertical" model=changeset onSubmit=(action (perform saveChangesTask changeset)) as |form|}}
+		{{form.element controlType="text" label="Name" placeholder="What do you want us to call you?" property="name"}}
+
+		{{yield}}
+
+		{{#if changeset.isDirty}}
+			{{bs-button
+				defaultText="Cancel"
+				type="secondary"
+				buttonType="button"
+				click=(action "cancel" changeset)
+				disabled=saveChangesTask.isRunning
+			}}
+			{{#bs-button type="primary" buttonType="submit" disabled=saveChangesTask.isRunning class="pull-right"}}
+				{{#if saveChangesTask.isRunning}}
+					{{#loading-icon}}Saving...{{/loading-icon}}
+				{{else}}
+					Save
+				{{/if}}
+			{{/bs-button}}
+		{{/if}}
+	{{/bs-form}}
+{{/with}}
